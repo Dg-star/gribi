@@ -1,0 +1,71 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1.ViewModel"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+    mc:Ignorable="d"
+        KeyDown="Window_KeyDown"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <local:MainViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="300"/>
+        </Grid.ColumnDefinitions>
+
+        <ListBox Grid.Column="0" ItemsSource="{Binding Mushrooms}" SelectedItem="{Binding SelectedMushroom}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="ID:" Margin="5,5,0,0"/>
+                        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Id, StringFormat={}{0:D}}" Margin="5,5,0,0"/>
+                        <TextBlock Grid.Column="2" Grid.Row="0" Text="Edible:" Margin="5,5,0,0"/>
+                        <TextBlock Grid.Column="3" Grid.Row="0" Text="{Binding Edible, StringFormat={}{0:b}}" Margin="5,5,0,0"/>
+
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Name:" Margin="5,5,0,0"/>
+                        <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Text="{Binding Name}" Margin="5,5,0,0"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <StackPanel Grid.Column="1" Margin="10">
+            <TextBlock Text="Detailed Information" FontWeight="Bold" Margin="0,0,0,10"/>
+            <TextBlock Text="ID: "/>
+            <TextBlock Text="{Binding SelectedMushroom.Id}"/>
+            <TextBlock Text="Name: "/>
+            <TextBox Text="{Binding SelectedMushroom.Name, Mode=TwoWay}"/>
+            <TextBlock Text="Color: "/>
+
+            <xctk:ColorPicker SelectedColor="{Binding SelectedMushroom.Color, Mode=TwoWay}" Margin="5,5,0,0"/>
+
+            <TextBlock Text="Edible: "/>
+            <CheckBox IsChecked="{Binding SelectedMushroom.Edible, Mode=TwoWay}"/>
+            <TextBlock Text="Weight(kg): "/>
+            <TextBox Text="{Binding SelectedMushroom.Weight, Mode=TwoWay}"/>
+            <TextBlock Text="Height(sm): "/>
+            <TextBox Text="{Binding SelectedMushroom.Height, Mode=TwoWay}"/>
+            <TextBlock Text="Cap Radius(sm): "/>
+            <TextBox Text="{Binding SelectedMushroom.CapRadius, Mode=TwoWay}"/>
+            <Button Command="{Binding SaveCommand}" Content="Save" Margin="0,10,0,0" IsEnabled="{Binding SaveCommand.CanExecute}"/>
+            <Button Command="{Binding AddNewMushroomCommand}" Content="Add New" Margin="0,10,0,0" Background="#FF919200" BorderBrush="#FF657F11" Foreground="White"/>
+            <Button Command="{Binding DeleteMushroomCommand}" Content="Delete" Margin="0,10,0,0" Background="Red" BorderBrush="#FF657F11" Foreground="White"
+                    IsEnabled="{Binding CanDelete}"/>
+        </StackPanel>
+    </Grid>
+</Window>

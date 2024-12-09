@@ -1,0 +1,20 @@
+[
+  {
+    "Id": 1,
+    "Name": "Белый гриб",
+    "Color": "#FFFFFFFF",
+    "Edible": true,
+    "Weight": 1.0,
+    "Height": 10.0,
+    "CapRadius": 4.0
+  },
+  {
+    "Id": 2,
+    "Name": "Подберёзовик",
+    "Color": "#FF5E4709",
+    "Edible": true,
+    "Weight": 0.2,
+    "Height": 6.0,
+    "CapRadius": 3.0
+  }
+]
